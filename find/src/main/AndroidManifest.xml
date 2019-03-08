@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jason.manongapp.find" >
+
+    <application>
+        <activity android:name=".news.NewsActivity" />
+    </application>
+</manifest>

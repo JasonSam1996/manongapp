@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_bg"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:id="@+id/more_setpwd_activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/qb_px_20"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/more_setpwd_tvtitle_text"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/more_setpwd_logo"
+        android:layout_width="@dimen/qb_px_128"
+        android:layout_height="@dimen/qb_px_128"
+        android:src="@drawable/login_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/more_setpwd_activity_title"
+        android:layout_margin="@dimen/qb_px_10"/>
+
+    <LinearLayout
+        android:id="@+id/more_setpwd_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/qb_px_50"
+        android:layout_marginRight="@dimen/qb_px_50"
+        android:layout_below="@id/more_setpwd_logo">
+        <EditText
+            android:id="@+id/more_setpwd_activity_etpwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_login_et_bg"
+            android:hint="@string/more_new_etpwd_hint"
+            android:drawableLeft="@drawable/et_pwd"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:padding="@dimen/qb_px_10"
+            android:drawablePadding="@dimen/qb_px_10"
+            android:inputType="textPassword"
+            android:maxLength="11"
+            />
+
+        <EditText
+            android:id="@+id/more_setpwd_activity_etverifypwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_login_et_bg"
+            android:hint="@string/more_etverifypwd_hint"
+            android:drawableLeft="@drawable/et_pwd"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:padding="@dimen/qb_px_10"
+            android:drawablePadding="@dimen/qb_px_10"
+            android:inputType="textPassword"
+            android:maxLength="11"
+            android:layout_marginTop="@dimen/qb_px_10"
+            />
+
+
+
+        <Button
+            android:id="@+id/more_setpwd_activity_btlogin"
+            android:layout_marginTop="@dimen/qb_px_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_bt"
+            android:text="@string/more_setpwd_btverify_text"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

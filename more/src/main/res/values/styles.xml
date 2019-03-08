@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:paddingLeft">@dimen/qb_px_5</item>
+    </style>
+
+</resources>

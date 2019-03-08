@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_bg"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:id="@+id/more_login_activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/qb_px_20"
+        >
+        <ImageButton
+            android:id="@+id/more_login_activity_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/close"
+            android:background="@null"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/more_login_text"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/more_login_logo"
+        android:layout_width="@dimen/qb_px_128"
+        android:layout_height="@dimen/qb_px_128"
+        android:src="@drawable/login_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/more_login_activity_title"
+        android:layout_margin="@dimen/qb_px_10"/>
+
+    <LinearLayout
+        android:id="@+id/more_login_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/qb_px_50"
+        android:layout_marginRight="@dimen/qb_px_50"
+        android:layout_below="@id/more_login_logo">
+        <EditText
+            android:id="@+id/more_login_activity_etusername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_login_et_bg"
+            android:hint="@string/more_login_etuser_hint"
+            android:drawableLeft="@drawable/et_user"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:padding="@dimen/qb_px_10"
+            android:drawablePadding="@dimen/qb_px_10"
+            android:maxLength="30"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/more_login_et_bg"
+            android:layout_marginTop="@dimen/qb_px_10"
+            >
+            <EditText
+                android:id="@+id/more_login_activity_etpassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/more_login_etpwd_hint"
+                android:background="@null"
+                android:drawableLeft="@drawable/et_pwd"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:padding="@dimen/qb_px_10"
+                android:drawablePadding="@dimen/qb_px_10"
+                android:maxLength="30"
+                android:inputType="textPassword"/>
+
+            <ImageButton
+                android:id="@+id/more_login_activity_eteyespwdigb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/eyeshide"
+                android:background="@null"
+                android:layout_margin="@dimen/qb_px_10"/>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/qb_px_5">
+            <TextView
+                android:id="@+id/more_login_activity_tvregister"
+                style="@style/CustomCheckboxTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/qb_px_10"
+                android:layout_alignParentRight="true"
+                android:text="@string/more_login_tvregister_text"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:id="@+id/more_login_activity_findpwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_login_tvforget_text"
+                android:layout_centerVertical="true"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                />
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/qb_px_30"
+            >
+            <Button
+                android:id="@+id/more_login_activity_btlogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/more_bt"
+                android:text="@string/more_login_text"
+                android:textColor="@color/white"
+                android:layout_marginRight="@dimen/qb_px_10"/>
+            <Button
+                android:id="@+id/more_login_activity_btcodelogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/more_bt"
+                android:text="@string/more_login_btcodelogin_text"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/qb_px_10"/>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/qb_px_10"
+            android:layout_marginLeft="@dimen/qb_px_30"
+            android:layout_marginRight="@dimen/qb_px_30">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/qb_px_1"
+                android:layout_weight="1"
+                android:background="@drawable/more_login_viewleft_bg"
+                android:layout_gravity="center"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/more_login_tvelse_text"
+                android:textColor="@color/white"
+                android:padding="@dimen/qb_px_10"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/qb_px_1"
+                android:layout_weight="1"
+                android:background="@drawable/more_login_viewright_bg"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/qb_px_10"
+            android:layout_marginLeft="@dimen/qb_px_30"
+            android:layout_marginRight="@dimen/qb_px_30">
+            <ImageButton
+                android:id="@+id/more_login_activity_weibo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@drawable/weibo_icon"/>
+            <ImageButton
+                android:id="@+id/more_login_activity_weixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@drawable/weixin_icon"
+                android:layout_centerInParent="true"/>
+            <ImageButton
+                android:id="@+id/more_login_activity_qq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:src="@drawable/qq_icon"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

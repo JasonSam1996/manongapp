@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <RelativeLayout
+        android:id="@+id/diay_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg">
+
+        <ImageButton
+            android:id="@+id/diary_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/diary_back"
+            android:background="@null"
+            android:layout_margin="@dimen/qb_px_10"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diary_title_text"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/diary_save_text"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/qb_px_10"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+
+    <include layout="@layout/diray_date"
+        />
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/diary_date"
+        android:background="#fff3ce"
+        android:layout_above="@id/biary_bar"
+        android:orientation="vertical"
+        >
+
+
+
+        <EditText
+            android:id="@+id/diary_et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="标题"
+            android:gravity="start"
+            android:textSize="16sp"
+            android:paddingTop="@dimen/qb_px_10"
+            android:paddingBottom="@dimen/qb_px_10"
+            android:paddingLeft="@dimen/qb_px_20"
+            />
+
+        <com.jason.manongapp.diary.ui.PointDividerView
+            android:id="@+id/diary_date_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_1"
+            android:layout_marginLeft="@dimen/qb_px_10"
+            android:layout_marginRight="@dimen/qb_px_10"
+            android:layout_below="@id/diary_et_title"/>
+
+        <com.jason.manongapp.diary.ui.ImageEditTextView
+            android:id="@+id/diary_et_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="日记内容"
+            android:gravity="start"
+            android:textSize="14sp"
+            android:layout_marginLeft="@dimen/qb_px_30"
+            android:layout_marginRight="@dimen/qb_px_30"
+            android:layout_marginTop="@dimen/qb_px_5"
+            android:layout_below="@id/diary_date_view"
+            />
+
+        <include android:id="@+id/diary_weather_mood_layout"
+            layout="@layout/diary_weather_mood"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/biary_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/more_location"
+            android:text="123123"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_1"
+            android:background="#bcbcbc"/>
+
+        <include layout="@layout/diary_bar"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

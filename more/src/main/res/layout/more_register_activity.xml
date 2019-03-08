@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    >
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/login_bg"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:id="@+id/more_register_activity_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/qb_px_20"
+        >
+        <ImageButton
+            android:id="@+id/more_register_activity_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/close"
+            android:background="@null"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/more_register_tvtitle_text"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/more_register_logo"
+        android:layout_width="@dimen/qb_px_128"
+        android:layout_height="@dimen/qb_px_128"
+        android:src="@drawable/login_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/more_register_activity_title"
+        android:layout_margin="@dimen/qb_px_10"/>
+
+    <LinearLayout
+        android:id="@+id/more_register_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/qb_px_50"
+        android:layout_marginRight="@dimen/qb_px_50"
+        android:layout_below="@id/more_register_logo">
+        <EditText
+            android:id="@+id/more_register_activity_etusername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_login_et_bg"
+            android:hint="@string/more_register_etuser_hint"
+            android:drawableLeft="@drawable/et_phone"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:padding="@dimen/qb_px_10"
+            android:drawablePadding="@dimen/qb_px_10"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_login_et_bg"
+            android:layout_marginTop="@dimen/qb_px_10"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:id="@+id/more_register_activity_etpassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/more_register_etpwd_hint"
+                android:background="@null"
+                android:drawableLeft="@drawable/et_pwd"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:padding="@dimen/qb_px_10"
+                android:drawablePadding="@dimen/qb_px_10"
+                android:inputType="textPassword"
+                />
+            <ImageButton
+                android:id="@+id/more_register_activity_eteyespwdigb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/eyeshide"
+                android:background="@null"
+                android:layout_margin="@dimen/qb_px_10"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_login_et_bg"
+            android:layout_marginTop="@dimen/qb_px_10"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:id="@+id/more_register_activity_etverifypassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/more_etverifypwd_hint"
+                android:drawableLeft="@drawable/et_pwd"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:padding="@dimen/qb_px_10"
+                android:drawablePadding="@dimen/qb_px_10"
+                android:inputType="textPassword"
+                />
+            <ImageButton
+                android:id="@+id/more_register_activity_eteyesverifypwdigb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/eyeshide"
+                android:background="@null"
+                android:layout_margin="@dimen/qb_px_10"/>
+        </LinearLayout>
+
+
+
+
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x10"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/more_register_activity_etpassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:background="@drawable/more_login_et_bg"
+                android:hint="@string/more_register_etgetcode_hint"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:padding="@dimen/x10"
+                android:drawableLeft="@drawable/et_code"
+                android:drawablePadding="@dimen/x10"
+                android:maxLength="6"
+                android:layout_marginRight="@dimen/x20"
+                />
+            <Button
+                android:id="@+id/more_register_activity_btgetcode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/more_register_btgetcode_text"
+                android:textSize="12sp"
+                android:background="@drawable/more_bt"
+                android:textColor="@color/white"/>
+        </LinearLayout>-->
+
+        <Button
+            android:id="@+id/more_register_activity_btregister"
+            android:layout_marginTop="@dimen/qb_px_30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/more_bt"
+            android:text="@string/more_register_tvtitle_text"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</RelativeLayout>

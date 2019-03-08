@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/new_scrollView"
+    >
+    
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/news_desc_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg"
+            android:padding="@dimen/qb_px_8">
+
+            <ImageButton
+                android:id="@+id/news_desc_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"
+                android:background="@null"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/white"
+                android:text="@string/find_title_zhihu"
+                android:textSize="20sp"
+                />
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/newsItemWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/qb_px_130"
+            android:layout_below="@id/news_desc_title"
+            >
+        </com.tencent.smtt.sdk.WebView>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/newsItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/qb_px_210"
+            fresco:placeholderImage="@drawable/news_image_placeholder"
+            android:layout_below="@id/news_desc_title"
+            />
+        <TextView
+            android:id="@+id/news_desc_title_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/newsItemImage"
+            android:layout_marginLeft="@dimen/qb_px_20"
+            android:layout_marginRight="@dimen/qb_px_20"
+            android:layout_marginTop="@dimen/qb_px_10"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+
+            />
+    </RelativeLayout>
+
+
+
+</ScrollView>

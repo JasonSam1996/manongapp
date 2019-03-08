@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <com.youth.banner.Banner
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/find_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/qb_px_200" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/find_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical"
+                        android:background="#ebebf2"
+                        android:nestedScrollingEnabled="false"/>
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My Library</string>
+    <string name="find_index">发现</string>
+    <string name="find_news_title">新闻标题</string>
+    <string name="find_title">标题</string>
+    <string name="find_title_zhihu">知乎日报</string>
+</resources>

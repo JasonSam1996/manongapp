@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_below="@id/diay_title"
+    android:id="@+id/diary_date"
+    >
+        <RelativeLayout
+            android:id="@+id/diary_daterl"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/diary_date_mood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="26"
+                    android:textColor="@color/bg"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginLeft="@dimen/qb_px_15"
+                    android:layout_marginBottom="@dimen/qb_px_5"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/qb_px_8"
+                    android:layout_marginLeft="@dimen/qb_px_5"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="星期一"
+                        android:textColor="@color/bg"
+                        android:textSize="14sp"
+                        android:nestedScrollingEnabled="false"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2019年3月"
+                        android:textColor="@color/bg"
+                        android:textSize="12sp"
+                        android:nestedScrollingEnabled="false"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/diary_select_weather_and_mood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/qb_px_15">
+                <ImageButton
+                    android:id="@+id/diary_date_image_mood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/diary_mood"
+                    android:layout_marginRight="@dimen/qb_px_10"/>
+                <ImageButton
+                    android:id="@+id/diary_date_image_weather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:src="@drawable/diary_weather_sun"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jason.manongapp">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+
+    <application
+        android:allowBackup="true"
+        android:anyDensity="true"
+        android:appComponentFactory="xxx"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:appComponentFactory"
+        android:name=".base.BaseApplication">
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:noHistory="false"/>
+        <activity android:name=".more.login.LoginActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".more.register.RegisterActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".more.codelogin.CodeLoginActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".more.findpwd.FindPwdActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".find.news.NewsActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".find.newsimage.NewsImageActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".index.calendar.CalendarActivity"
+            android:launchMode="singleTop"/>
+        <activity android:name=".diary.news.AddDiaryActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+    </application>
+
+</manifest>

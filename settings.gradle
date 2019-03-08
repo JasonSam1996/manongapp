@@ -1,0 +1,1 @@
+include ':app', ':base', ':index', ':find', ':blog', ':diary', ':more'

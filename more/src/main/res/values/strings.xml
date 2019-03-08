@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">More</string>
+    <string name="more_clock_in">签到</string>
+    <string name="more_num">0</string>
+    <string name="more_not_login">未登录</string>
+    <string name="more_blog_text">博客</string>
+    <string name="more_diary_text">日记</string>
+    <string name="more_collect_text">收藏</string>
+    <string name="more_draft_text">草稿</string>
+    <string name="more_bill_text">账单</string>
+    <string name="more_chart_text">图表</string>
+    <string name="more_album_text">相册</string>
+    <string name="more_message_text">消息</string>
+    <string name="more_usercenter_text">个人中心</string>
+    <string name="more_setting_text">设置</string>
+    <string name="more_login_text">登录</string>
+    <string name="more_login_etuser_hint">用户名/手机号</string>
+    <string name="more_login_etpwd_hint">密码</string>
+    <string name="more_login_tvregister_text"><u>立即注册</u></string>
+    <string name="more_login_tvforget_text"><u>忘记密码</u></string>
+    <string name="more_login_tvelse_text">其他登录方式</string>
+    <string name="more_login_btcodelogin_text">使用短信登录</string>
+    <string name="more_register_tvtitle_text">注册</string>
+    <string name="more_codelogin_btgetcode_text">获取验证码</string>
+    <string name="more_register_etuser_hint">用&#160;&#160;户&#160;&#160;名</string>
+    <string name="more_register_etpwd_hint">密&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;码</string>
+    <string name="more_etverifypwd_hint">确认密码</string>
+    <string name="more_codelogin_etcode_hint">验证码</string>
+    <string name="more_codelogin_etgetcodetime_text">s后重新获取</string>
+    <string name="more_codelogin_etphone_text">手机号</string>
+    <string name="more_findpwd_etphone_hint">手机号</string>
+    <string name="more_new_etpwd_hint">新密码</string>
+    <string name="more_findpwd_tvtitle_text">重置密码</string>
+    <string name="more_findpwd_etcode_hint">验证码</string>
+    <string name="more_setpwd_btverify_text">确认</string>
+    <string name="more_setpwd_tvtitle_text">请您设置密码</string>
+
+
+</resources>

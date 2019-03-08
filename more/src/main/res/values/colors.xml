@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="more_num_line">#9b9b9b</color>
+    <color name="more_bg">#ebebee</color>
+    <color name="login_bg">#15be94</color>
+    <color name="red">#ff0000</color>
+
+</resources>
