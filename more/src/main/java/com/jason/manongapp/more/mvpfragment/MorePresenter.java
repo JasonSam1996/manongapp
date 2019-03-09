@@ -8,5 +8,11 @@ import com.jason.manongapp.base.mvp.BasePresenterImpl;
  */
 
 public class MorePresenter extends BasePresenterImpl<MoreContract.View> implements MoreContract.Presenter{
-    
+
+
+    public void initView(){
+        mView.setGridRecyclerView();
+        mView.setLinearRecyclerView();
+    }
+
 }

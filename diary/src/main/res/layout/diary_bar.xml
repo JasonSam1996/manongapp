@@ -23,18 +23,6 @@
             android:text="表情"
             android:textSize="12sp" />
 
-        <Button
-            android:id="@+id/diary_bar_rbphotograph"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:button="@null"
-            android:drawableTop="@drawable/diary_photograph"
-            android:drawablePadding="@dimen/qb_px_3"
-            android:gravity="center"
-            android:text="拍照"
-            android:textSize="12sp" />
 
         <Button
             android:id="@+id/diary_bar_rbpicture"

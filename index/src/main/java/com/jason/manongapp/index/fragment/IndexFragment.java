@@ -7,6 +7,7 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -472,9 +473,19 @@ public class IndexFragment extends MVPBaseFragment<IndexContract.View, IndexPres
 
     @OnClick(R2.id.index_write_diary)
     public void openWriteDiray(View view){
-        Intent intent = new Intent(getContext(),AddDiaryActivity.class);
-        getActivity().startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+        String auth_msg = SPUtils.get("auth_msg","");
+        if ((!TextUtils.isEmpty(auth_msg) && auth_msg.equals("ok")) || !TextUtils.isEmpty(SPUtils.get("session_token",""))) {
+            Intent intent = new Intent(getContext(),AddDiaryActivity.class);
+            getActivity().startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+        }else if (auth_msg.equals("fail")) {
+            showToast("登录过期，请重新登录！");
+            return;
+        }else {
+            showToast("请先登录");
+            return;
+        }
+
 
     }
 

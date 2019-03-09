@@ -7,16 +7,24 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 
 import com.jason.manongapp.R;
+import com.jason.manongapp.api.AuthService;
 import com.jason.manongapp.base.BaseActivity;
+import com.jason.manongapp.base.http.RxHttpUtils;
+import com.jason.manongapp.base.http.interceptor.Transformer;
+import com.jason.manongapp.base.http.observer.CommonObserver;
 import com.jason.manongapp.base.http.utils.SPUtils;
+import com.jason.manongapp.bean.AuthCallBack;
 import com.orhanobut.logger.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,7 +74,34 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        Logger.i("session_token："+SPUtils.get("session_token",""));
+        if (!TextUtils.isEmpty(SPUtils.get("session_token","")) && !TextUtils.isEmpty(SPUtils.get("objectid",""))) {
+            Map<String,Object> headers = new HashMap<>();
+            headers.put("X-Bmob-Application-Id","3e2c91cb95ceefc5b4ad4da9916d1888");
+            headers.put("X-Bmob-REST-API-Key","437139b0987ff441647f635727c93fbf");
+            headers.put("X-Bmob-Session-Token",SPUtils.get("session_token",""));
+            headers.put("Content-Type","application/json");
+            RxHttpUtils.getSInstance()
+                    .addHeaders(headers)
+                    .createSApi(AuthService.class)
+                    .isAuthPastDue(SPUtils.get("objectid",""))
+                    .compose(Transformer.switchSchedulers())
+                    .subscribe(new CommonObserver<AuthCallBack>() {
+                        @Override
+                        protected void onError(String errorMsg) {
+                            Logger.i("出错了！"+errorMsg);
+                        }
 
+                        @Override
+                        protected void onSuccess(AuthCallBack authCallBack) {
+                            Logger.i("成功！"+authCallBack);
+                            if (authCallBack != null) {
+                                SPUtils.put("auth_msg",authCallBack.getMsg());
+                            }
+                        }
+                    });
+
+        }
     }
 
 

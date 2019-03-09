@@ -35,20 +35,6 @@
         android:textColor="@drawable/selector_bar_text_color"
         />
     <RadioButton
-        android:id="@+id/main_bar_rbblog"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:button="@null"
-        android:text="@string/bar_blogs"
-        android:gravity="center"
-        android:drawableTop="@drawable/selector_bar_blog"
-        android:background="@android:color/transparent"
-        android:textSize="12sp"
-        android:drawablePadding="@dimen/qb_px_3"
-        android:textColor="@drawable/selector_bar_text_color"
-        />
-    <RadioButton
         android:id="@+id/main_bar_rbfind"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

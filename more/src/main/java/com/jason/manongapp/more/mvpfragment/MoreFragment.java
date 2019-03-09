@@ -70,8 +70,7 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
 
     @Override
     public void initView() {
-        setGridRecyclerView();
-        setLinearRecyclerView();
+        mPresenter.initView();
     }
 
     @Override

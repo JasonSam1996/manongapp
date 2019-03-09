@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.jason.manongapp.base.http.utils.SPUtils;
 import com.jason.manongapp.base.mvp.MVPBaseActivity;
 import com.jason.manongapp.more.R;
 import com.jason.manongapp.more.R2;
@@ -22,6 +23,7 @@ import com.jason.manongapp.more.findpwd.FindPwdActivity;
 import com.jason.manongapp.more.login.bean.SerializableMap;
 import com.jason.manongapp.more.login.bean.UserInfo;
 import com.jason.manongapp.more.register.RegisterActivity;
+import com.orhanobut.logger.Logger;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.Map;
@@ -143,6 +145,8 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void onFinishCallBack(UserInfo info) {
+        SPUtils.put("session_token",info.getSessionToken());
+        SPUtils.put("objectid",info.getObjectId());
         Intent intent = new Intent();
         intent.putExtra("model","user");
         intent.putExtra("user",info);
@@ -178,13 +182,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
             String rgpwd = data.getStringExtra("rgpassword");
             etUsername.setText(rguser);
             etPassword.setText(rgpwd);
-//            Logger.i(rguser);
-//            Logger.i(rgpwd);
-//            UserInfo userInfo = (UserInfo) data.getSerializableExtra("user");
-            /*username = userInfo.getUsername();
-            loginUsername.setText(username);
-            Logger.i(userInfo.toString());
-            mSimpleDraweeView.setBackgroundResource(R.drawable.login_success_userimg);*/
         }
         if (resultCode == Activity.RESULT_OK && requestCode == 300) {
             SMSCodeCallBackBean smsCodeCallBackBean = (SMSCodeCallBackBean) data.getSerializableExtra("user");

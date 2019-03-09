@@ -34,8 +34,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_bar_rbbiary)
     RadioButton main_bar_rbbiary;
 
-    @BindView(R.id.main_bar_rbblog)
-    RadioButton main_bar_rbblog;
+//    @BindView(R.id.main_bar_rbblog)
+//    RadioButton main_bar_rbblog;
 
     @BindView(R.id.main_bar_rbfind)
     RadioButton main_bar_rbfind;
@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity {
 
     private Fragment currentFragment = new Fragment();
     private DiaryFragment diaryFragment = new DiaryFragment();
-    private BlogFragment blogFragment = new BlogFragment();
+//    private BlogFragment blogFragment = new BlogFragment();
     private FindFragment findFragment = new FindFragment();
     private MoreFragment moreFragment = new MoreFragment();
 
@@ -94,9 +94,6 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.main_bar_rbbiary:
                         switchFragment(diaryFragment).commit();
-                        break;
-                    case R.id.main_bar_rbblog:
-                        switchFragment(blogFragment).commit();
                         break;
                     case R.id.main_bar_rbfind:
                         switchFragment(findFragment).commit();

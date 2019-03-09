@@ -1,16 +1,30 @@
 package com.jason.manongapp.diary.news;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -32,9 +46,13 @@ import com.jason.manongapp.diary.bean.EmojiBean;
 import com.jason.manongapp.diary.dao.EmojiDao;
 import com.jason.manongapp.diary.ui.ImageEditTextView;
 import com.jason.manongapp.diary.utils.AnimatorUtils;
+import com.jason.manongapp.diary.utils.ImageUtils;
+import com.jason.manongapp.diary.utils.ScreenUtils;
 import com.orhanobut.logger.Logger;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -58,7 +76,7 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
     EditText etTitle;
 
     @BindView(R2.id.diary_et_content)
-    ImageEditTextView etContent;
+    EditText etContent;
 
     @BindView(R2.id.diary_emoji_item)
     RecyclerView ryeomjiItem;
@@ -66,11 +84,13 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
     @BindView(R2.id.diary_bar_rbemoji)
     CheckBox radioButton;
 
+
+
+
     private ExpressionAdapter adapter;
 
     private List<EmojiBean> emojiBeans;
 
-    private int type = 0;
 
     @Override
     protected void onResume() {
@@ -133,6 +153,14 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
         }*/
     }
 
+    @OnClick(R2.id.diary_bar_rbpicture)
+    public void openPicture(View view){
+
+        Intent getAlbum = new Intent(Intent.ACTION_PICK);
+        getAlbum.setType("image/*");
+        startActivityForResult(getAlbum,500);
+    }
+
     @Override
     public void initRecyclerView() {
         GridLayoutManager manager = new GridLayoutManager(this, 5, GridLayoutManager.VERTICAL, false);
@@ -143,7 +171,6 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
         adapter.setItemChildClickListener(new ExpressionAdapter.ItemChildClickListener() {
             @Override
             public void onChildClick(final int position) {
-                Logger.i("Type："+type);
                 if (etTitle.hasFocus()) {
                     etTitle.append(adapter.getItem(position).getEmojiString());
                 }
@@ -177,44 +204,73 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
             }
         });
 
-        etTitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ryeomjiItem.getVisibility() == View.GONE) {
-                    Logger.i("隐藏的");
-                }else {
-                    /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(v,InputMethodManager.SHOW_FORCED);
-
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);*/
-                    ryeomjiItem.setVisibility(View.GONE);
-                    Logger.i("显示的");
-                }
-            }
-        });
-        etContent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ryeomjiItem.getVisibility() == View.GONE) {
-                    Logger.i("隐藏的");
-                }else {
-                    /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.showSoftInput(v,InputMethodManager.SHOW_FORCED);
-
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);*/
-                    ryeomjiItem.setVisibility(View.GONE);
-                    Logger.i("显示的");
-                }
-            }
-        });
 
 
     }
 
+    @OnClick({R2.id.diary_et_title,R2.id.diary_et_content})
+    public void titleAndContent(View view){
+        if (ryeomjiItem.getVisibility() == View.GONE) {
+            Logger.i("隐藏的");
+        }else {
+            ryeomjiItem.setVisibility(View.GONE);
+            Logger.i("显示的");
+        }
+    }
 
+    @OnClick(R2.id.diary_save)
+    public void save(View view){
+        mPresenter.saveDiary();
+    }
 
     @Override
     public void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Logger.i("requestCode："+requestCode+"，resultCode："+resultCode);
+        Bitmap bm = null;
+        ContentResolver resolver = getContentResolver();
+        if (requestCode == 500) {
+            if (data == null) {
+                showToast("取消插入图片");
+                return;
+            }
+            mPresenter.selectPhotoCallback(this,data,resolver);
+//            selectPhotoCallback(data, resolver);
+        }
+    }
+
+
+//    @OnClick(R2.id)
+
+
+    @Override
+    public void etContentAppendEnter() {
+        etContent.append("\n");
+    }
+
+    @Override
+    public String getContent() {
+        return etContent.getText().toString();
+    }
+    //endregion
+
+    //region 将图片插入到EditText中
+    @Override
+    public void insertPhotoToEditText(SpannableString ss){
+        Editable et = etContent.getText();
+        int start = etContent.getSelectionStart();
+        et.insert(start,ss);
+        etContent.setText(et);
+        etContent.setSelection(start+ss.length());
+        etContent.setFocusableInTouchMode(true);
+        etContent.setFocusable(true);
+    }
+    //endregion
+
+
 }
