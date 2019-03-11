@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -49,11 +50,13 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     ImageButton imgbtShowPassword;
 
     private boolean isShowPassword = true;
+    private String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTitle(false);
         super.onCreate(savedInstanceState);
+
     }
 
     @OnClick(R2.id.more_login_activity_close)
@@ -147,6 +150,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     public void onFinishCallBack(UserInfo info) {
         SPUtils.put("session_token",info.getSessionToken());
         SPUtils.put("objectid",info.getObjectId());
+        SPUtils.put("username",info.getUsername());
         Intent intent = new Intent();
         intent.putExtra("model","user");
         intent.putExtra("user",info);

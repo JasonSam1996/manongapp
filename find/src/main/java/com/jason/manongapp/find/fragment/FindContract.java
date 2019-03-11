@@ -30,6 +30,8 @@ public class FindContract {
 
         void initBanner(ZhiHuNewNewsBean zhiHuNewNewsBean,List<String> imageUrls,List<String> titles);
 
+        void setRefresh();
+
         List<String> getTopImageUrls(ZhiHuNewNewsBean zhiHuNewNewsBean);
 
         List<String> getTopImageTitles(ZhiHuNewNewsBean zhiHuNewNewsBean);
@@ -40,12 +42,13 @@ public class FindContract {
 
     interface Model{
         void getNewsItem(Presenter presenter, Dialog dialog);
+        void getNewsItemRefresh(Presenter presenter);
         void getNews(String newsId,Presenter presenter);
     }
 
 
     interface  Presenter extends BasePresenter<View> {
-        void getNewsItemSuccess(ZhiHuNewNewsBean zhiHuNewNewsBean);
+        void getNewsItemSuccess(ZhiHuNewNewsBean zhiHuNewNewsBean,boolean isRefresh);
 
         void getNewsItemError(String errorMsg);
 

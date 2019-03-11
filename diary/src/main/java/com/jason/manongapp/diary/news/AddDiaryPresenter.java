@@ -16,9 +16,13 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ImageSpan;
 
+import com.google.gson.Gson;
 import com.jason.manongapp.base.dialog.LoadingDialog;
 import com.jason.manongapp.base.mvp.BasePresenterImpl;
 import com.jason.manongapp.diary.R;
+import com.jason.manongapp.diary.bean.AddDiaryBean;
+import com.jason.manongapp.diary.bean.CityLocationBean;
+import com.jason.manongapp.diary.bean.SaveCallBack;
 import com.jason.manongapp.diary.bean.UpLoadingCallBack;
 import com.jason.manongapp.diary.utils.ImageUtils;
 import com.jason.manongapp.diary.utils.ScreenUtils;
@@ -29,6 +33,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,15 +52,39 @@ import io.reactivex.schedulers.Schedulers;
 public class AddDiaryPresenter extends BasePresenterImpl<AddDiaryContract.View> implements AddDiaryContract.Presenter {
 
     public void saveDiary(){
-        SpannableString spannableString = new SpannableString(mView.getContent());
-        Logger.i("spannableString："+spannableString.toString());
-//        Logger.i("content："+Html.toHtml(spannableString));
-//        Logger.i("content："+parseUnicodeToStr(Html.toHtml(spannableString)));
+        Calendar calendar = Calendar.getInstance();
+        String city = mView.getCity();
+        String content = mView.getContent();
+        String title = mView.getBiaryTitle();
+        String mood = mView.getMood();
+        String user_type = "Pointer";
+        String user_className = "_User";
+        String user_objectid = mView.getObjectId();
+        String weather = mView.getWeather();
+        String week = mView.getDayWeek(calendar);
+        AddDiaryBean.UserBean userBean = new AddDiaryBean.UserBean(user_type,user_className,user_objectid);
+        AddDiaryBean addDiaryBean = new AddDiaryBean(city,content,title,mood,userBean,weather,week);
+        mView.showToast("保存中，请稍后······");
+        LoadingDialog dialog = new LoadingDialog(mView.getContext(),R.style.MyDialog);
+        AddDirayModel.getInstance().save(addDiaryBean,this,dialog);
+    }
+
+    public void getCity(){
+        if (mView.getLocation(mView.getContext())!=null) {
+            AddDirayModel.getInstance().getCity("json",mView.getLocation(mView.getContext()),"esNPFDwwsXWtsQfw4NMNmur1",this);
+        }else {
+            mView.setCityText("定位失败");
+
+        }
     }
 
     public void initView(){
+        Calendar calendar = Calendar.getInstance();
         mView.initRecyclerView();
         mView.initKeyboard();
+        mView.setDay(mView.getDay(calendar));
+        mView.setDayWeek(mView.getDayWeek(calendar));
+        mView.setYearAndMonth(mView.getYear(calendar));
     }
 
     public void selectPhotoCallback(Activity activity, @Nullable Intent data, ContentResolver resolver) {
@@ -222,19 +251,30 @@ public class AddDiaryPresenter extends BasePresenterImpl<AddDiaryContract.View> 
         mView.showToast(errorMsg);
     }
 
-    //unicode转String
-    public String parseUnicodeToStr(String unicodeStr) {
-        String regExp = "&#\\d*;";
-        Matcher m = Pattern.compile(regExp).matcher(unicodeStr);
-        StringBuffer sb = new StringBuffer();
-        while (m.find()) {
-            String s = m.group(0);
-            s = s.replaceAll("(&#)|;", "");
-            char c = (char) Integer.parseInt(s);
-            m.appendReplacement(sb, Character.toString(c));
+    @Override
+    public void getCitySuccess(CityLocationBean cityLocationBean) {
+        if (cityLocationBean != null) {
+            mView.setCityText(cityLocationBean.getResult().getAddressComponent().getDistrict());
+//            getWeather();
         }
-        m.appendTail(sb);
-        return sb.toString();
     }
+
+    @Override
+    public void getCityError(String errorMsg) {
+        mView.showToast(errorMsg);
+    }
+
+    @Override
+    public void saveSuccess(SaveCallBack saveCallBack) {
+        if (!TextUtils.isEmpty(saveCallBack.getObjectId())) {
+            mView.showToast("保存成功！");
+        }
+    }
+
+    @Override
+    public void saveError(String errorMsg) {
+        mView.showToast(errorMsg);
+    }
+
 
 }

@@ -3,6 +3,7 @@ package com.jason.manongapp.find.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
@@ -37,6 +38,8 @@ public class FindFragment extends MVPBaseFragment<FindContract.View,FindPresente
     @BindView(R2.id.find_banner)
     Banner findBanner;
 
+    @BindView(R2.id.find_swipe)
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +51,12 @@ public class FindFragment extends MVPBaseFragment<FindContract.View,FindPresente
 
     @Override
     public void initView() {
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPresenter.refresh();
+            }
+        });
 //        mPresenter.initTitle();
     }
 
@@ -114,6 +123,11 @@ public class FindFragment extends MVPBaseFragment<FindContract.View,FindPresente
     }
 
     @Override
+    public void setRefresh() {
+        refreshLayout.setRefreshing(false);
+    }
+
+    @Override
     public List<String> getTopImageUrls(ZhiHuNewNewsBean zhiHuNewNewsBean) {
         final List<String> imageUrls = new ArrayList<>();
         Observable.fromIterable(zhiHuNewNewsBean.getTop_stories())
@@ -164,9 +178,12 @@ public class FindFragment extends MVPBaseFragment<FindContract.View,FindPresente
         findBanner.startAutoPlay();
     }
 
-    @Override
+    /*@Override
     public void onStop() {
         super.onStop();
         findBanner.stopAutoPlay();
-    }
+    }*/
+
+
+
 }

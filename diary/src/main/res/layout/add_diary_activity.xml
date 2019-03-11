@@ -97,6 +97,7 @@
                 android:hint="日记内容"
                 android:gravity="start"
                 android:textSize="14sp"
+                android:autoLink="all"
                 />
         </ScrollView>
 
@@ -119,10 +120,11 @@
         android:background="@color/white">
 
         <TextView
+            android:id="@+id/diary_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/more_location"
-            android:text="123123"/>
+            android:text="正在定位"/>
 
         <View
             android:layout_width="match_parent"

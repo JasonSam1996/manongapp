@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.jason.manongapp.R;
 import com.jason.manongapp.base.BaseActivity;
-import com.jason.manongapp.blog.fragment.BlogFragment;
 import com.jason.manongapp.diary.fragment.DiaryFragment;
 import com.jason.manongapp.find.fragment.FindFragment;
 import com.jason.manongapp.index.fragment.IndexFragment;
@@ -74,6 +73,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
     }
 
     @Override

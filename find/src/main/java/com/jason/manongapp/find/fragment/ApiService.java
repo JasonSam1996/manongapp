@@ -10,8 +10,6 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-//    @GET("news/latest")
-//    Observable<ZhiHuNewNewsBean.StoriesBean> getStories();
 
     @GET("https://news-at.zhihu.com/api/4/news/latest")
     Observable<ZhiHuNewNewsBean> getNewsItem();

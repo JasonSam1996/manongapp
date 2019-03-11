@@ -9,12 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jason.manongapp.base.http.utils.SPUtils;
 import com.jason.manongapp.base.mvp.MVPBaseFragment;
 import com.jason.manongapp.more.R;
 import com.jason.manongapp.more.R2;
@@ -70,7 +72,13 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
 
     @Override
     public void initView() {
+        username = SPUtils.get("username","");
+        if (!TextUtils.isEmpty(username)) {
+            loginUsername.setText(username);
+            isLogin = true;
+        }
         mPresenter.initView();
+
     }
 
     @Override

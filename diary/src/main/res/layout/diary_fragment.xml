@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    >
 
+
+    <ImageView
+        android:id="@+id/diary_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/diary_title"
+        android:scaleType="fitXY"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/diary_index"/>
+        android:text="点滴生活"
+        android:textSize="25sp"
+        android:layout_margin="@dimen/qb_px_30"
+        android:textStyle="bold"/>
 
-</LinearLayout>
+     <android.support.v7.widget.RecyclerView
+         android:id="@+id/diary_recyclerView"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_below="@id/diary_title"/>
+
+    <ImageView
+        android:id="@+id/diary_add"
+        android:layout_width="@dimen/qb_px_45"
+        android:layout_height="@dimen/qb_px_45"
+        android:src="@drawable/diary_add"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/qb_px_30"
+        android:layout_marginRight="@dimen/qb_px_30"
+        />
+
+</RelativeLayout>

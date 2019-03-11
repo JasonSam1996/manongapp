@@ -15,6 +15,7 @@ import com.jason.manongapp.diary.utils.ExpressionUtil;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Describe: 表情的Adapter
@@ -65,7 +66,8 @@ public class ExpressionAdapter extends RecyclerView.Adapter<ExpressionAdapter.Ex
         TextView tv;
         public ExpressionViewHolder(View itemView) {
             super(itemView);
-            tv = (TextView) itemView.findViewById(R.id.item_expression_layout_TV);
+            ButterKnife.bind(this,itemView);
+//            tv = (TextView) itemView.findViewById(R.id.item_expression_layout_TV);
         }
     }
 

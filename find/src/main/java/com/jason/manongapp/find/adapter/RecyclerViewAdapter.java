@@ -39,6 +39,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.dataList = dataList;
     }
 
+    public List<ZhiHuNewNewsBean.StoriesBean> getDataList() {
+        return dataList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -116,5 +120,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         void getIdCallBack(int newsId);
     }
 
+
+
+    public void addData(ZhiHuNewNewsBean.StoriesBean storiesBean){
+        if (dataList != null && dataList.size()>0) {
+            dataList.add(storiesBean);
+        }
+    }
 
 }

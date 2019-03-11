@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/qb_px_20"
+        android:background="@drawable/diary_dilog"
+        android:layout_centerInParent="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="插入超链接"
+            android:layout_gravity="center"
+            android:textColor="#38ADFF"
+            android:textSize="20sp"
+            android:layout_margin="@dimen/qb_px_10"
+            />
+
+        <EditText
+            android:id="@+id/diary_dialog_edlink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入链接地址"
+            android:textColor="@android:color/black"
+            android:background="@drawable/diary_dialog_edit"
+            android:padding="@dimen/qb_px_5"
+            android:layout_margin="@dimen/qb_px_10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="@dimen/qb_px_10">
+            <Button
+                android:id="@+id/diary_dialog_cancel"
+                android:layout_width="@dimen/qb_px_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:text="取消"
+                android:textColor="#38ADFF"
+                />
+            <Button
+                android:id="@+id/diary_dialog_confirm"
+                android:layout_width="@dimen/qb_px_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:text="确认"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

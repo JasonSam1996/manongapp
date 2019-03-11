@@ -27,6 +27,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/diary_however"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_10"
@@ -34,6 +35,7 @@
                 android:src="@drawable/diary_mood" />
 
             <ImageButton
+                android:id="@+id/diary_tired"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -41,6 +43,7 @@
                 android:src="@drawable/diary_tired" />
 
             <ImageButton
+                android:id="@+id/diary_crying"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -48,6 +51,7 @@
                 android:src="@drawable/diary_crying" />
 
             <ImageButton
+                android:id="@+id/diary_sleepy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -55,6 +59,7 @@
                 android:src="@drawable/diary_sleepy" />
 
             <ImageButton
+                android:id="@+id/diary_relieved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -62,6 +67,7 @@
                 android:src="@drawable/diary_relieved" />
 
             <ImageButton
+                android:id="@+id/diary_fearful"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -69,6 +75,7 @@
                 android:src="@drawable/diary_fearful" />
 
             <ImageButton
+                android:id="@+id/diary_smirking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -78,6 +85,7 @@
         </LinearLayout>
 
         <ImageButton
+            android:id="@+id/diary_pouting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/diary_mood_first_line"
@@ -109,6 +117,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/diary_weather_sun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_10"
@@ -116,6 +125,7 @@
                 android:src="@drawable/diary_weather_sun" />
 
             <ImageButton
+                android:id="@+id/diary_weather_cloudy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -123,6 +133,7 @@
                 android:src="@drawable/diary_weather_cloudy" />
 
             <ImageButton
+                android:id="@+id/diary_weather_clounds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -130,6 +141,7 @@
                 android:src="@drawable/diary_weather_clounds" />
 
             <ImageButton
+                android:id="@+id/diary_weather_sun_rain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -137,6 +149,7 @@
                 android:src="@drawable/diary_weather_sun_rain" />
 
             <ImageButton
+                android:id="@+id/diary_weather_rain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -144,6 +157,7 @@
                 android:src="@drawable/diary_weather_rain" />
 
             <ImageButton
+                android:id="@+id/diary_weather_raiin2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -162,6 +176,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/diary_weather_storm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/qb_px_5"
@@ -169,6 +184,7 @@
                 android:src="@drawable/diary_weather_storm" />
 
             <ImageButton
+                android:id="@+id/diary_weather_morestorm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"

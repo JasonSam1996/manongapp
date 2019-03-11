@@ -17,9 +17,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/diary_day_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="26"
                     android:textColor="@color/bg"
                     android:textSize="35sp"
                     android:textStyle="bold"
@@ -36,18 +36,18 @@
                     android:orientation="vertical"
                     >
                     <TextView
+                        android:id="@+id/diary_day_week"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="星期一"
                         android:textColor="@color/bg"
                         android:textSize="14sp"
                         android:nestedScrollingEnabled="false"
 
                         />
                     <TextView
+                        android:id="@+id/diary_add_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2019年3月"
                         android:textColor="@color/bg"
                         android:textSize="12sp"
                         android:nestedScrollingEnabled="false"

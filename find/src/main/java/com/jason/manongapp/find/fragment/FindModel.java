@@ -35,7 +35,29 @@ public class FindModel implements FindContract.Model {
                     @Override
                     protected void onSuccess(ZhiHuNewNewsBean zhiHuNewNewsBean) {
                         if (zhiHuNewNewsBean != null) {
-                            presenter.getNewsItemSuccess(zhiHuNewNewsBean);
+                            presenter.getNewsItemSuccess(zhiHuNewNewsBean,false);
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void getNewsItemRefresh(final FindContract.Presenter presenter) {
+        RxHttpUtils.createApi(ApiService.class)
+                .getNewsItem()
+                .compose(Transformer.<ZhiHuNewNewsBean>switchSchedulers())
+                .subscribe(new CommonObserver<ZhiHuNewNewsBean>() {
+                    @Override
+                    protected void onError(String errorMsg) {
+                        Logger.e("onError: "+errorMsg);
+                        presenter.getNewsItemError(errorMsg);
+//                        Log.i("TAG", "onError: "+errorMsg);
+                    }
+
+                    @Override
+                    protected void onSuccess(ZhiHuNewNewsBean zhiHuNewNewsBean) {
+                        if (zhiHuNewNewsBean != null) {
+                            presenter.getNewsItemSuccess(zhiHuNewNewsBean,true);
                         }
                     }
                 });

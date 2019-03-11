@@ -41,7 +41,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
     implementation project(':base')
     implementation project(':index')
-    implementation project(':blog')
     implementation project(':diary')
     implementation project(':find')
     implementation project(':more')
