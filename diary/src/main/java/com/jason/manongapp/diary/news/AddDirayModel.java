@@ -27,6 +27,8 @@ public class AddDirayModel implements AddDiaryContract.Model {
 
     @Override
     public void uploading(String path, final AddDiaryContract.Presenter presenter, Dialog dialog) {
+        Logger.i("errorMsg：有执行吗");
+
         String contentType = "";
         String fileName = "";
 
@@ -49,7 +51,7 @@ public class AddDirayModel implements AddDiaryContract.Model {
                         if (!TextUtils.isEmpty(errorMsg) || errorMsg != null) {
                             presenter.upLoadingError(errorMsg);
                         }
-//                        Logger.i("errorMsg：" + errorMsg);
+                        Logger.i("errorMsg：" + errorMsg);
                     }
 
                     @Override
@@ -57,7 +59,7 @@ public class AddDirayModel implements AddDiaryContract.Model {
                         if (upLoadingCallBack != null) {
                             presenter.upLoadingSuccess(upLoadingCallBack);
                         }
-//                        Logger.i("onSuccess：" + upLoadingCallBack.toString());
+                        Logger.i("onSuccess：" + upLoadingCallBack.toString());
                     }
                 });
     }

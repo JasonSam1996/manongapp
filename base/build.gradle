@@ -64,5 +64,5 @@ dependencies {
     api 'com.youth.banner:banner:1.4.10'
     api 'org.greenrobot:greendao:3.2.2'
     api 'com.haibin:calendarview:3.5.4'
-
+    api 'org.greenrobot:eventbus:3.0.0'
 }

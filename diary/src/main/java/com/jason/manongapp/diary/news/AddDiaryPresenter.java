@@ -239,6 +239,7 @@ public class AddDiaryPresenter extends BasePresenterImpl<AddDiaryContract.View> 
 
     @Override
     public void upLoadingSuccess(UpLoadingCallBack upLoadingCallBack) {
+        Logger.i("???："+upLoadingCallBack.toString());
         if (upLoadingCallBack.getUrl() != null && !TextUtils.isEmpty(upLoadingCallBack.getUrl())) {
             insertImg(mView.getContext(),upLoadingCallBack.getUrl());
         }else {

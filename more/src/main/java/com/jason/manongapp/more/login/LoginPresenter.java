@@ -61,7 +61,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
     @Override
     public void qqLoginSuccess(Map<String, String> qqMap, Dialog dialog) {
 
-//        mView.onQQFinishCallBack(qqMap,dialog);
+        mView.onQQFinishCallBack(qqMap,dialog);
     }
 
 

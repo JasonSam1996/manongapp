@@ -31,8 +31,13 @@ import com.jason.manongapp.more.login.bean.SerializableMap;
 import com.jason.manongapp.more.login.bean.UserInfo;
 import com.jason.manongapp.setting.SettingActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import butterknife.BindView;
@@ -77,6 +82,13 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
         String auth_msg = SPUtils.get("auth_msg", "");
         username = SPUtils.get("username","");
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(auth_msg)) {
+            if (!TextUtils.isEmpty(SPUtils.get("image_url",""))) {
+                RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+                roundingParams.setBorder(R.color.red, 1.0f);
+                roundingParams.setRoundAsCircle(true);
+                mSimpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+                mSimpleDraweeView.setImageURI(Uri.parse(SPUtils.get("image_url","")));
+            }
             loginUsername.setText(username);
             isLogin = true;
         }
@@ -148,51 +160,6 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == 100) {
-            String model = data.getStringExtra("model");
-            com.orhanobut.logger.Logger.i("model",model);
-            if (model.equals("user")) {
-                com.orhanobut.logger.Logger.i("model",model);
-                UserInfo userInfo = (UserInfo) data.getSerializableExtra("user");
-                isLogin = data.getBooleanExtra("isLogin",false);
-                username = userInfo.getUsername();
-                loginUsername.setText(username);
-//                mSimpleDraweeView.setBackgroundResource(R.drawable.login_success_userimg);
-            }else if (model.equals("sms")) {
-                SMSCodeCallBackBean smsCodeCallBackBean = (SMSCodeCallBackBean) data.getSerializableExtra("smsuser");
-                isLogin = data.getBooleanExtra("isLogin",false);
-                username = smsCodeCallBackBean.getUsername();
-                loginUsername.setText(username);
-                mSimpleDraweeView.setBackgroundResource(R.drawable.login_success_userimg);
-            }else if (model.equals("qqLogin")) {
-                isLogin = data.getBooleanExtra("isLogin",false);
-                Bundle bundle = data.getExtras();
-                String name = null;
-                String imageUrl = null;
-                if (bundle != null) {
-                    SerializableMap serializableMap = (SerializableMap) bundle.get("qqLogin");
-                    if (serializableMap != null) {
-                        name = serializableMap.getMap().get("name");
-                        imageUrl = serializableMap.getMap().get("profile_image_url");
-                    }
-                }
-                if (name != null && imageUrl != null) {
-                    loginUsername.setText(name);
-                    RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
-                    roundingParams.setBorder(R.color.red, 1.0f);
-                    roundingParams.setRoundAsCircle(true);
-                    mSimpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
-                    mSimpleDraweeView.setImageURI(Uri.parse(imageUrl));
-                }
-            }else if (model.equals("logout")) {
-                loginUsername.setText("未登录");
-            }
-
-        }
-    }
 
     @OnClick(R2.id.more_login_head_portrait)
     public void startLogin(View view) {
@@ -202,7 +169,7 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
             getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
         }else {
             Intent intent = new Intent(getContext(), LoginActivity.class);
-            this.startActivityForResult(intent, 100);
+            this.startActivity(intent);
             getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
         }
     }
@@ -218,13 +185,65 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
     @Override
     public void onResume() {
         super.onResume();
-        initView();
+        if(!EventBus.getDefault().isRegistered(this)){//加上判断
+            EventBus.getDefault().register(this);
+        }
     }
-
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setHasOptionsMenu(false);
+    public void onDestroy() {
+        if (EventBus.getDefault().isRegistered(this))//加上判断
+            EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void LoginCallBack(String string){
+        com.orhanobut.logger.Logger.i("loginCallBack："+string);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void LoginCallBack(UserInfo info){
+        String image_url = "https://iplaygame91.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/f/i/file_9.png";
+        SPUtils.put("image_url",image_url);
+        isLogin = true;
+        username = info.getUsername();
+        loginUsername.setText(username);
+        RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+        roundingParams.setBorder(R.color.red, 1.0f);
+        roundingParams.setRoundAsCircle(true);
+        mSimpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+        mSimpleDraweeView.setImageURI(Uri.parse(image_url));
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void LoginCallBack(SMSCodeCallBackBean smsCodeCallBackBean){
+        String image_url = "https://iplaygame91.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/f/i/file_9.png";
+        SPUtils.put("image_url",image_url);
+        isLogin = true;
+        username = smsCodeCallBackBean.getUsername();
+        loginUsername.setText(username);
+        RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+        roundingParams.setBorder(R.color.red, 1.0f);
+        roundingParams.setRoundAsCircle(true);
+        mSimpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+        mSimpleDraweeView.setImageURI(Uri.parse(image_url));
+//        com.orhanobut.logger.Logger.i("loginCallBack："+string);
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void LoginCallBack(Map<String, String> qqMap){
+        String name = qqMap.get("name");
+        String imageUrl = qqMap.get("profile_image_url");
+        SPUtils.put("username",name);
+        SPUtils.put("image_url",imageUrl);
+        if (name != null && imageUrl != null) {
+            isLogin = true;
+            loginUsername.setText(name);
+            RoundingParams roundingParams = RoundingParams.fromCornersRadius(5f);
+            roundingParams.setBorder(R.color.red, 1.0f);
+            roundingParams.setRoundAsCircle(true);
+            mSimpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
+            mSimpleDraweeView.setImageURI(Uri.parse(imageUrl));
+        }
+//        com.orhanobut.logger.Logger.i("loginCallBack："+qqMap.toString());
+    }
+
 }

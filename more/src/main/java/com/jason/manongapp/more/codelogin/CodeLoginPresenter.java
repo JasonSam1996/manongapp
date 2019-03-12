@@ -74,19 +74,7 @@ public class CodeLoginPresenter extends BasePresenterImpl<CodeLoginContract.View
     @Override
     public void codeLoginSuccess(SMSCodeCallBackBean smsCodeCallBackBean) {
         if (smsCodeCallBackBean != null) {
-            if (SPUtils.contains("SPPhone")) {
-                if (!SPUtils.get("SPPhone","").equals(smsCodeCallBackBean.getUsername())) {
-                    SPUtils.remove("");
-                }
-                mView.onFinishCallBack(smsCodeCallBackBean);
-//                Intent intent = new Intent(mView.getContext(),)
-            } else {
-                SPUtils.put("SPPhone", smsCodeCallBackBean.getUsername());
-
-                /*if(SPUtils.get("")){
-
-                }*/
-            }
+            mView.onFinishCallBack(smsCodeCallBackBean);
         }
     }
 

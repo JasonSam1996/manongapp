@@ -28,6 +28,8 @@ import com.jason.manongapp.more.register.RegisterActivity;
 import com.orhanobut.logger.Logger;
 import com.umeng.socialize.UMShareAPI;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Map;
 
 import butterknife.BindView;
@@ -160,32 +162,36 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @Override
     public void onFinishCallBack(UserInfo info) {
+//        Logger.i("是这里回调的吗?");
         SPUtils.put("session_token",info.getSessionToken());
         SPUtils.put("objectid",info.getObjectId());
         SPUtils.put("username",info.getUsername());
         SPUtils.put("isLogin",true);
-        Intent intent = new Intent();
-        intent.putExtra("model","user");
-        intent.putExtra("user",info);
-        intent.putExtra("isLogin",true);
-        setResult(LoginActivity.RESULT_OK,intent);
+        EventBus.getDefault().post(info);
         finish();
         overridePendingTransition(R.anim.finish_in,R.anim.finish_to);
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+//        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
     public void onQQFinishCallBack(Map<String, String> qqMap, Dialog dialog) {
-        Intent intent = new Intent();
-        intent.putExtra("model","qqLogin");
-        SerializableMap qqLoginMap = new SerializableMap();
-        qqLoginMap.setMap(qqMap);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("qqLogin",qqLoginMap);
-        intent.putExtras(bundle);
-        intent.putExtra("isLogin",true);
-        setResult(LoginActivity.RESULT_OK,intent);
+        SPUtils.put("session_token",qqMap.get("sessionToken"));
+        SPUtils.put("objectid",qqMap.get("objectId"));
+        SPUtils.put("isLogin",true);
         dialog.dismiss();
         showToast("登录成功");
+        EventBus.getDefault().post(qqMap);
         finish();
 //        overridePendingTransition(R.anim.finish_in,R.anim.finish_to);
     }
@@ -202,11 +208,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         }
         if (resultCode == Activity.RESULT_OK && requestCode == 300) {
             SMSCodeCallBackBean smsCodeCallBackBean = (SMSCodeCallBackBean) data.getSerializableExtra("user");
-            Intent intent = new Intent();
-            intent.putExtra("model","sms");
-            intent.putExtra("smsuser",smsCodeCallBackBean);
-            intent.putExtra("isLogin",true);
-            setResult(LoginActivity.RESULT_OK,intent);
+            EventBus.getDefault().post(smsCodeCallBackBean);
             finish();
             overridePendingTransition(R.anim.finish_in,R.anim.finish_to);
         }

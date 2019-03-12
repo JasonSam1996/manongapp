@@ -1,6 +1,7 @@
 package com.jason.manongapp.more.login.api;
 
 
+import com.jason.manongapp.more.login.bean.QQLoginCallBack;
 import com.jason.manongapp.more.login.bean.UserInfo;
 import com.jason.manongapp.more.register.bean.RegisterCallBackBean;
 
@@ -18,6 +19,6 @@ public interface LoginService {
     Observable<UserInfo> login(@Query("username") String username, @Query("password") String password);
 
     @POST("https://api2.bmob.cn/1/users")
-    Observable<RegisterCallBackBean> register(@Body RequestBody responseBody);
+    Observable<QQLoginCallBack> qqLogin(@Body RequestBody responseBody);
 
 }
