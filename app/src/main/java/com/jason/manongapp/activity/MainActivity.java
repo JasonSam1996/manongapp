@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.jason.manongapp.R;
 import com.jason.manongapp.base.BaseActivity;
+import com.jason.manongapp.base.http.utils.SPUtils;
 import com.jason.manongapp.diary.fragment.DiaryFragment;
 import com.jason.manongapp.find.fragment.FindFragment;
 import com.jason.manongapp.index.fragment.IndexFragment;
@@ -54,6 +56,8 @@ public class MainActivity extends BaseActivity {
 //    private BlogFragment blogFragment = new BlogFragment();
     private FindFragment findFragment = new FindFragment();
     private MoreFragment moreFragment = new MoreFragment();
+
+    private long clickTime = 0;
 
     /*@Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,4 +140,34 @@ public class MainActivity extends BaseActivity {
         return transaction;
     }
 
+    @Override
+    public void onBackPressed() {
+        exit();
+    }
+
+    private void exit() {
+        if ((System.currentTimeMillis()-clickTime) > 2000) {
+            toastShort("再按一次推出程序");
+            clickTime = System.currentTimeMillis();
+        }else {
+            finish();
+        }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            onBackPressed();
+            return true;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        SPUtils.remove("auth_msg");
+        super.onDestroy();
+    }
 }
+

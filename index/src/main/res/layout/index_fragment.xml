@@ -96,7 +96,8 @@
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/location"
                 android:drawablePadding="@dimen/qb_px_5"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:text="正在定位"/>
         </RelativeLayout>
 
 

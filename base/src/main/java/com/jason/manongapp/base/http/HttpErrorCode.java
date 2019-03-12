@@ -9,5 +9,6 @@ public class HttpErrorCode {
     public static final int USERALREADYEXISTS = 202;
     public static final int CODE_ERROR = 207;
     public static final int PHONE_REQUEST_ERROR = 10010;
+    public static final int USER_SETTING_NEWPWD = 210;
 
 }

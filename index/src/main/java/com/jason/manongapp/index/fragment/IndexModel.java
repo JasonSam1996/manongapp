@@ -10,6 +10,8 @@ import com.jason.manongapp.index.fragment.api.IndexService;
 import com.jason.manongapp.index.fragment.bean.CityLocationBean;
 import com.jason.manongapp.index.fragment.bean.IndexBean;
 import com.jason.manongapp.index.fragment.bean.WeatherBean;
+import com.orhanobut.logger.Logger;
+
 
 public class IndexModel implements IndexContract.Model {
 
@@ -25,6 +27,7 @@ public class IndexModel implements IndexContract.Model {
                 .subscribe(new CommonObserver<IndexBean>() {
                     @Override
                     protected void onError(String errorMsg) {
+                        Logger.i("error："+errorMsg);
                         presenter.getImageUrlError(errorMsg);
                     }
 
@@ -43,6 +46,7 @@ public class IndexModel implements IndexContract.Model {
                 .subscribe(new CommonObserver<WeatherBean>() {
                     @Override
                     protected void onError(String errorMsg) {
+                        Logger.i("error："+errorMsg);
                         presenter.getWeatherError(errorMsg);
                     }
 
@@ -62,6 +66,7 @@ public class IndexModel implements IndexContract.Model {
                 .subscribe(new CommonObserver<CityLocationBean>() {
                     @Override
                     protected void onError(String errorMsg) {
+                        Logger.i("error："+errorMsg);
                         presenter.getCityError(errorMsg);
                     }
 

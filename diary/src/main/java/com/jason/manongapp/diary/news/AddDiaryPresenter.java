@@ -268,6 +268,7 @@ public class AddDiaryPresenter extends BasePresenterImpl<AddDiaryContract.View> 
     public void saveSuccess(SaveCallBack saveCallBack) {
         if (!TextUtils.isEmpty(saveCallBack.getObjectId())) {
             mView.showToast("保存成功！");
+            mView.finishBack();
         }
     }
 

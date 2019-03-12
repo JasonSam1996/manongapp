@@ -41,6 +41,8 @@ public class AddDiaryContract {
 
         void setYearAndMonth(String yearAndMonth);
 
+        void finishBack();
+
         String getContent();
 
         String getLocation(Context context);

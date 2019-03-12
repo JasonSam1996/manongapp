@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -50,7 +51,6 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
     ImageButton imgbtShowPassword;
 
     private boolean isShowPassword = true;
-    private String username;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,8 +61,20 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
 
     @OnClick(R2.id.more_login_activity_close)
     public void loginClose(View view){
-        finish();
-        overridePendingTransition(R.anim.finish_in,R.anim.finish_to);
+        if (getIntent().getStringExtra("methods") == null) {
+            finish();
+            overridePendingTransition(R.anim.finish_in,R.anim.finish_to);
+        }else {
+            if (getIntent().getStringExtra("methods").equals("reset")) {
+                return;
+            }
+            if (getIntent().getStringExtra("methods").equals("logout")) {
+                return;
+//            Intent intent = new Intent(this,MainActivity.class)
+            }
+        }
+
+
     }
 
     @OnClick(R2.id.more_login_activity_btcodelogin)
@@ -151,6 +163,7 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
         SPUtils.put("session_token",info.getSessionToken());
         SPUtils.put("objectid",info.getObjectId());
         SPUtils.put("username",info.getUsername());
+        SPUtils.put("isLogin",true);
         Intent intent = new Intent();
         intent.putExtra("model","user");
         intent.putExtra("user",info);
@@ -197,6 +210,14 @@ public class LoginActivity extends MVPBaseActivity<LoginContract.View, LoginPres
             finish();
             overridePendingTransition(R.anim.finish_in,R.anim.finish_to);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return false;
     }
 
 }

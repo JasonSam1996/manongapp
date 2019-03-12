@@ -86,11 +86,11 @@ public class BaseApplication extends Application {
                 //3、使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）
                 //.setSslSocketFactory(bksInputStream,"123456",cerInputStream)
                 //全局超时配置
-                .setReadTimeout(10)
+                .setReadTimeout(1)
                 //全局超时配置
-                .setWriteTimeout(10)
+                .setWriteTimeout(1)
                 //全局超时配置
-                .setConnectTimeout(10)
+                .setConnectTimeout(1)
                 //全局是否打开请求log日志
                 .setDebug(true)
                 .build();

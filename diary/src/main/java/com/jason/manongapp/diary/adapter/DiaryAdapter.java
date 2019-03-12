@@ -47,9 +47,17 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.DiaryViewHol
     @Override
     public void onBindViewHolder(DiaryViewHolder holder, final int position) {
         DiaryBean.ResultsBean resultsBean = diaryBeans.get(position);
-        int index = resultsBean.getDiary_content().indexOf("http://bmob");
-        int end = resultsBean.getDiary_content().indexOf(".jpg") + 4;
-        String imageUrl = resultsBean.getDiary_content().substring(index,end);
+        String imageUrl;
+
+        if (!resultsBean.getDiary_content().contains("img src=")) {
+            Logger.i("没有图片");
+            imageUrl = "https://i.kfs.io/playlist/global/47130192v1/fit/500x500.jpg";
+        }else {
+            int index = resultsBean.getDiary_content().indexOf("http://bmob");
+            int end = resultsBean.getDiary_content().indexOf(".jpg") + 4;
+            imageUrl = resultsBean.getDiary_content().substring(index,end);
+        }
+
         String date = resultsBean.getCreatedAt().substring(0,7);
         String dayMonth = resultsBean.getCreatedAt().substring(8,10);
         String time = resultsBean.getCreatedAt().substring(11,16);

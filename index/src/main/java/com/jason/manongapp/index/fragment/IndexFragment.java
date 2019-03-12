@@ -474,7 +474,25 @@ public class IndexFragment extends MVPBaseFragment<IndexContract.View, IndexPres
     @OnClick(R2.id.index_write_diary)
     public void openWriteDiray(View view){
         String auth_msg = SPUtils.get("auth_msg","");
-        if ((!TextUtils.isEmpty(auth_msg) && auth_msg.equals("ok")) || !TextUtils.isEmpty(SPUtils.get("session_token",""))) {
+        if (!TextUtils.isEmpty(auth_msg) && auth_msg.equals("ok")) {
+            Logger.i("自动登录的");
+            if (!TextUtils.isEmpty(SPUtils.get("session_token",""))) {
+                Intent intent = new Intent(getContext(),AddDiaryActivity.class);
+                getActivity().startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+            }
+        }else if (!TextUtils.isEmpty(auth_msg) && auth_msg.equals("fail")) {
+            Logger.i("登录过期的");
+            showToast("登录过期，请重新登录！");
+        }else if (SPUtils.get("isLogin",false)) {
+            Logger.i("普通登录的");
+            Intent intent = new Intent(getContext(),AddDiaryActivity.class);
+            getActivity().startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
+        }else {
+            showToast("请先登录");
+        }
+        /*if ((!TextUtils.isEmpty(auth_msg) && auth_msg.equals("ok")) && !TextUtils.isEmpty(SPUtils.get("session_token",""))) {
             Intent intent = new Intent(getContext(),AddDiaryActivity.class);
             getActivity().startActivity(intent);
             getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
@@ -484,8 +502,7 @@ public class IndexFragment extends MVPBaseFragment<IndexContract.View, IndexPres
         }else {
             showToast("请先登录");
             return;
-        }
-
+        }*/
 
     }
 

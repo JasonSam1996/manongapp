@@ -29,9 +29,11 @@ import com.jason.manongapp.more.decoration.MyItemDecoration;
 import com.jason.manongapp.more.login.LoginActivity;
 import com.jason.manongapp.more.login.bean.SerializableMap;
 import com.jason.manongapp.more.login.bean.UserInfo;
+import com.jason.manongapp.setting.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -72,8 +74,9 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
 
     @Override
     public void initView() {
+        String auth_msg = SPUtils.get("auth_msg", "");
         username = SPUtils.get("username","");
-        if (!TextUtils.isEmpty(username)) {
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(auth_msg)) {
             loginUsername.setText(username);
             isLogin = true;
         }
@@ -150,12 +153,14 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
             String model = data.getStringExtra("model");
+            com.orhanobut.logger.Logger.i("model",model);
             if (model.equals("user")) {
+                com.orhanobut.logger.Logger.i("model",model);
                 UserInfo userInfo = (UserInfo) data.getSerializableExtra("user");
                 isLogin = data.getBooleanExtra("isLogin",false);
                 username = userInfo.getUsername();
                 loginUsername.setText(username);
-                mSimpleDraweeView.setBackgroundResource(R.drawable.login_success_userimg);
+//                mSimpleDraweeView.setBackgroundResource(R.drawable.login_success_userimg);
             }else if (model.equals("sms")) {
                 SMSCodeCallBackBean smsCodeCallBackBean = (SMSCodeCallBackBean) data.getSerializableExtra("smsuser");
                 isLogin = data.getBooleanExtra("isLogin",false);
@@ -182,6 +187,8 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
                     mSimpleDraweeView.getHierarchy().setRoundingParams(roundingParams);
                     mSimpleDraweeView.setImageURI(Uri.parse(imageUrl));
                 }
+            }else if (model.equals("logout")) {
+                loginUsername.setText("未登录");
             }
 
         }
@@ -190,8 +197,9 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
     @OnClick(R2.id.more_login_head_portrait)
     public void startLogin(View view) {
         if (isLogin) {
-            showToast("已经登录");
-            return;
+            Intent intent = new Intent(getContext(), SettingActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.in_from_right,R.anim.out_to_left);
         }else {
             Intent intent = new Intent(getContext(), LoginActivity.class);
             this.startActivityForResult(intent, 100);
@@ -206,6 +214,13 @@ public class MoreFragment extends MVPBaseFragment<MoreContract.View, MorePresent
 
         outState.putString("more_login_username",username);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initView();
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jason.manongapp.base.dialog.LoadingDialog;
 import com.jason.manongapp.base.http.observer.CommonObserver;
+import com.jason.manongapp.base.http.utils.NetUtils;
 import com.jason.manongapp.base.mvp.BasePresenterImpl;
 import com.jason.manongapp.index.fragment.bean.CityLocationBean;
 import com.jason.manongapp.index.fragment.bean.IndexBean;
@@ -35,12 +36,19 @@ public class IndexPresenter extends BasePresenterImpl<IndexContract.View> implem
     }
 
     public void getImage(){
+
         LoadingDialog dialog = new LoadingDialog(mView.getContext(),R.style.MyDialog);
         IndexModel.getInstance().getImageUrl(this,dialog);
 //        mView.getLocation(mView.getContext());
     }
 
     public void getCity(){
+//        Logger.i("isNet:"+NetUtils.isNet(mView.getContext()));
+        if (!NetUtils.isNet()) {
+            mView.showToast("网络错误，请检查网络");
+            mView.setCityText("定位失败");
+            return;
+        }
         if (mView.getLocation(mView.getContext())!=null) {
             IndexModel.getInstance().getCity("json",mView.getLocation(mView.getContext()),"esNPFDwwsXWtsQfw4NMNmur1",this);
         }else {

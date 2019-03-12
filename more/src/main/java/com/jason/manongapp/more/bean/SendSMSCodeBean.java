@@ -38,4 +38,7 @@ public class SendSMSCodeBean {
                 ", template='" + template + '\'' +
                 '}';
     }
+
+
+
 }

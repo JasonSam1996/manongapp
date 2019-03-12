@@ -19,7 +19,9 @@ import com.jason.manongapp.base.BaseActivity;
 import com.jason.manongapp.base.http.RxHttpUtils;
 import com.jason.manongapp.base.http.interceptor.Transformer;
 import com.jason.manongapp.base.http.observer.CommonObserver;
+import com.jason.manongapp.base.http.utils.NetUtils;
 import com.jason.manongapp.base.http.utils.SPUtils;
+import com.jason.manongapp.base.http.utils.ToastUtils;
 import com.jason.manongapp.bean.AuthCallBack;
 import com.orhanobut.logger.Logger;
 
@@ -48,6 +50,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
@@ -68,13 +71,15 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void startMain() {
+        if (!NetUtils.isNetworkConnected()) {
+            ToastUtils.showToast("网络错误，请检查网络！");
+        }
         Timer timer = new Timer();
         timer.schedule(new MyTask(),3000);
     }
 
     @Override
     public void initView() {
-        Logger.i("session_token："+SPUtils.get("session_token",""));
         if (!TextUtils.isEmpty(SPUtils.get("session_token","")) && !TextUtils.isEmpty(SPUtils.get("objectid",""))) {
             Map<String,Object> headers = new HashMap<>();
             headers.put("X-Bmob-Application-Id","3e2c91cb95ceefc5b4ad4da9916d1888");
@@ -97,10 +102,13 @@ public class SplashActivity extends BaseActivity {
                             Logger.i("成功！"+authCallBack);
                             if (authCallBack != null) {
                                 SPUtils.put("auth_msg",authCallBack.getMsg());
+                                startMain();
                             }
                         }
                     });
 
+        }else {
+            startMain();
         }
     }
 

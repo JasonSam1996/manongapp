@@ -22,6 +22,7 @@ import com.jason.manongapp.find.R;
 import com.jason.manongapp.find.R2;
 import com.jason.manongapp.find.adapter.ImagePagerAdapter;
 import com.jason.manongapp.find.newsimage.ui.NewImageViewPager;
+import com.jason.manongapp.find.ui.ViewPagerFixed;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ import me.relex.photodraweeview.PhotoDraweeView;
 public class NewsImageActivity extends MVPBaseActivity<NewsImageContract.View, NewsImagePresenter> implements NewsImageContract.View {
 
     @BindView(R2.id.news_image_viewPager)
-    ViewPager vpNewsImage;
+    ViewPagerFixed vpNewsImage;
 
     @BindView(R2.id.news_image_page)
     TextView tvNewsImagePage;

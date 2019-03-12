@@ -52,6 +52,7 @@
         <activity android:name=".diary.news.AddDiaryActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".setting.SettingActivity"/>
     </application>
 
 </manifest>

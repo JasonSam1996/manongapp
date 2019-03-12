@@ -14,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.URLSpan;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -27,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jason.manongapp.base.dialog.SaveDialog;
 import com.jason.manongapp.base.http.utils.SPUtils;
 import com.jason.manongapp.base.mvp.MVPBaseActivity;
 import com.jason.manongapp.base.utils.FinishUtils;
@@ -133,7 +136,25 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
 
     @OnClick(R2.id.diary_back)
     public void onBack(View view) {
-        FinishUtils.finishUtils(this);
+        if (TextUtils.isEmpty(getBiaryTitle()) && TextUtils.isEmpty(getContent())) {
+            FinishUtils.finishUtils(this);
+            return;
+        }
+        final SaveDialog dialog = new SaveDialog(this);
+        dialog.setOnCancelListener(new SaveDialog.OnCancelListener() {
+            @Override
+            public void OnCancel() {
+                dialog.dismiss();
+            }
+        });
+        dialog.setOnYesListener(new SaveDialog.OnYesListener() {
+            @Override
+            public void OnYes() {
+                mPresenter.saveDiary();
+            }
+        });
+        dialog.show();
+//
     }
 
     @OnCheckedChanged(R2.id.diary_bar_rbemoji)
@@ -379,6 +400,11 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
     public void setYearAndMonth(String yearAndMonth) {
         tvAddDate.setText(yearAndMonth);
     }
+
+    @Override
+    public void finishBack() {
+        FinishUtils.finishUtils(this);
+    }
     //endregion
 
     //region 将图片插入到EditText中
@@ -523,7 +549,10 @@ public class AddDiaryActivity extends MVPBaseActivity<AddDiaryContract.View, Add
     }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            return true;
+        }
+        return false;
     }
 }
